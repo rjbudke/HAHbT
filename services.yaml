@@ -1,0 +1,9 @@
+# custom_components/hahbt/services.yaml
+
+log_habit:
+  name: Log Habit
+  description: Log an occurrence of a habit.
+  fields:
+    habit_id:
+      description: The unique ID of the habit.
+      example: "123e4567-e89b-12d3-a456-426614174000"
