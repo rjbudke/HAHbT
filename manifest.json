@@ -1,12 +1,13 @@
 {
     "domain": "hahbt",
     "name": "HAHbT (Home Assistant Habit Tracker)",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "documentation": "https://github.com/rjbudke/hahbt/readme.md",
     "requirements": [],
     "dependencies": [],
     "codeowners": ["@rjbudke"],
     "config_flow": true,
-    "iot_class": "local_polling"
+    "iot_class": "local_polling",
+    "icon": "https://raw.githubusercontent.com/rjbudke/HAHbT/main/images/icon.png",
+    "logo": "https://raw.githubusercontent.com/rjbudke/HAHbT/main/images/logo.png"
   }
-  
