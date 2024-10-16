@@ -1,7 +1,7 @@
 # custom_components/hahbt/sensor.py
 
 import logging
-from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
+from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
 from homeassistant.const import UnitOfTime
 from homeassistant.util import dt as dt_util
 
@@ -81,33 +81,33 @@ class HAHbTCountTodaySensor(HAHbTSensorBase):
         self._attr_icon = "mdi:calendar-today"
         self._attr_name = f"HAHbT {self._habit_name} Count Today"
         self._attr_unique_id = f"{self._habit_data['habit_id']}_count_today"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_native_unit_of_measurement = None
 
     @property
-    def unique_id(self):
-        return self._attr_unique_id
-
-    @property
-    def state(self):
+    def native_value(self):
         return self._state
 
     async def async_update(self):
         try:
             timestamps = self._habit_data["timestamps"]
-            _LOGGER.debug("Updating 'Count Today' sensor '%s' with timestamps: %s", self.name, timestamps)
-            # Use local time instead of UTC
+            _LOGGER.debug(
+                "Updating 'Count Today' sensor '%s' with timestamps: %s",
+                self._attr_name,
+                timestamps,
+            )
             today = dt_util.now().date()
             count = 0
             for ts in timestamps:
                 parsed_ts = self.parse_timestamp(ts)
                 if parsed_ts is None:
                     continue
-                # Convert parsed timestamp to local timezone
                 local_ts = parsed_ts.astimezone(dt_util.DEFAULT_TIME_ZONE)
                 if local_ts.date() == today:
                     count += 1
             self._state = count
         except Exception as e:
-            _LOGGER.error("Error updating sensor '%s': %s", self.name, e)
+            _LOGGER.error("Error updating sensor '%s': %s", self._attr_name, e)
             self._state = None
 
 class HAHbTIntervalSensor(HAHbTSensorBase):
@@ -118,18 +118,13 @@ class HAHbTIntervalSensor(HAHbTSensorBase):
         self._attr_icon = "mdi:calendar-expand-horizontal"
         self._attr_name = f"HAHbT Time Between {self._habit_name}"
         self._attr_unique_id = f"{self._habit_data['habit_id']}_interval"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = SensorDeviceClass.DURATION
+        self._attr_native_unit_of_measurement = UnitOfTime.MINUTES
 
     @property
-    def unique_id(self):
-        return self._attr_unique_id
-
-    @property
-    def state(self):
+    def native_value(self):
         return self._state
-
-    @property
-    def native_unit_of_measurement(self):
-        return UnitOfTime.MINUTES
 
     async def async_update(self):
         try:
@@ -148,6 +143,7 @@ class HAHbTIntervalSensor(HAHbTSensorBase):
         except Exception as e:
             _LOGGER.error("Error updating sensor '%s': %s", self.name, e)
             self._state = None
+        pass
 
 class HAHbTMostRecentSensor(HAHbTSensorBase):
     """Sensor for the most recent occurrence of a habit."""
@@ -195,22 +191,24 @@ class HAHbTCountTotalSensor(HAHbTSensorBase):
         self._attr_icon = "mdi:sigma"
         self._attr_name = f"HAHbT {self._habit_name} Count Total"
         self._attr_unique_id = f"{self._habit_data['habit_id']}_count_total"
+        self._attr_state_class = SensorStateClass.TOTAL_INCREASING
+        self._attr_native_unit_of_measurement = None
 
     @property
-    def unique_id(self):
-        return self._attr_unique_id
-
-    @property
-    def state(self):
+    def native_value(self):
         return self._state
 
     async def async_update(self):
         try:
             timestamps = self._habit_data["timestamps"]
-            _LOGGER.debug("Updating 'Count Total' sensor '%s' with timestamps: %s", self.name, timestamps)
+            _LOGGER.debug(
+                "Updating 'Count Total' sensor '%s' with timestamps: %s",
+                self._attr_name,
+                timestamps,
+            )
             self._state = len(timestamps)
         except Exception as e:
-            _LOGGER.error("Error updating sensor '%s': %s", self.name, e)
+            _LOGGER.error("Error updating sensor '%s': %s", self._attr_name, e)
             self._state = None
 
 class HAHbTIntervalAverageSensor(HAHbTSensorBase):
@@ -221,18 +219,13 @@ class HAHbTIntervalAverageSensor(HAHbTSensorBase):
         self._attr_icon = "mdi:calendar-expand-horizontal-outline"
         self._attr_name = f"HAHbT Average Time Between {self._habit_name}"
         self._attr_unique_id = f"{self._habit_data['habit_id']}_interval_average"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_device_class = SensorDeviceClass.DURATION
+        self._attr_native_unit_of_measurement = UnitOfTime.MINUTES
 
     @property
-    def unique_id(self):
-        return self._attr_unique_id
-
-    @property
-    def state(self):
+    def native_value(self):
         return self._state
-
-    @property
-    def native_unit_of_measurement(self):
-        return UnitOfTime.MINUTES
 
     async def async_update(self):
         try:
@@ -263,3 +256,4 @@ class HAHbTIntervalAverageSensor(HAHbTSensorBase):
         except Exception as e:
             _LOGGER.error("Error updating sensor '%s': %s", self.name, e)
             self._state = None
+        pass
