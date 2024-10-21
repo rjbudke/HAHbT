@@ -1,6 +1,7 @@
 # custom_components/hahbt/config_flow.py
 
-import uuid
+import random
+import string
 import voluptuous as vol
 
 from homeassistant import config_entries
@@ -15,11 +16,16 @@ class HahbtConfigFlow(config_entries.ConfigFlow):
     VERSION = 1
     CONNECTION_CLASS = config_entries.CONN_CLASS_LOCAL_PUSH
 
+    def generate_habit_id(self):
+        """Generate a habit ID in the format hbt-XXXXX."""
+        random_chars = ''.join(random.choices(string.ascii_letters + string.digits, k=5))
+        return 'hbt-' + random_chars
+
     async def async_step_user(self, user_input=None):
         """Handle the initial step."""
         if user_input is not None:
             habit_name = user_input[CONF_HABIT_NAME]
-            habit_id = str(uuid.uuid4())
+            habit_id = self.generate_habit_id()
 
             await self.async_set_unique_id(habit_id)
             self._abort_if_unique_id_configured()

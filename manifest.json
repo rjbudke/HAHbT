@@ -1,7 +1,7 @@
 {
     "domain": "hahbt",
     "name": "HAHbT (Home Assistant Habit Tracker)",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "documentation": "https://github.com/rjbudke/hahbt/readme.md",
     "requirements": [],
     "dependencies": [],
