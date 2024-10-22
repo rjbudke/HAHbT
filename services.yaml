@@ -6,4 +6,4 @@ log_habit:
   fields:
     habit_id:
       description: The unique ID of the habit.
-      example: "123e4567-e89b-12d3-a456-426614174000"
+      example: "hbt-123456"
