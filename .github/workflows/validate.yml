@@ -1,0 +1,20 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  basic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify integration structure
+        run: |
+          test -f custom_components/hahbt/manifest.json
+          test -f custom_components/hahbt/__init__.py
+          test -f custom_components/hahbt/config_flow.py
+          test -f custom_components/hahbt/services.yaml
+          test -f hacs.json

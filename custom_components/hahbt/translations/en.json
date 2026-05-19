@@ -1,0 +1,95 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up HAHbT",
+        "description": "Create the HAHbT integration entry. Habits are managed after setup through services.",
+        "data": {}
+      }
+    },
+    "abort": {
+      "already_configured": "HAHbT is already configured."
+    }
+  },
+  "entity": {
+    "button": {
+      "log": {
+        "name": "Log"
+      }
+    }
+  },
+  "services": {
+    "create_habit": {
+      "name": "Create Habit",
+      "description": "Create a new habit stream.",
+      "fields": {
+        "name": {
+          "name": "Name",
+          "description": "Human-friendly habit name."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "Optional Material Design icon."
+        },
+        "notes": {
+          "name": "Notes",
+          "description": "Optional notes about the habit."
+        }
+      }
+    },
+    "update_habit": {
+      "name": "Update Habit",
+      "description": "Update an existing habit.",
+      "fields": {
+        "habit_id": {
+          "name": "Habit ID",
+          "description": "Stable internal habit identifier."
+        },
+        "name": {
+          "name": "Name",
+          "description": "New habit name."
+        },
+        "icon": {
+          "name": "Icon",
+          "description": "New optional icon."
+        },
+        "notes": {
+          "name": "Notes",
+          "description": "New optional notes."
+        },
+        "status": {
+          "name": "Status",
+          "description": "Lifecycle state for the habit: active, inactive, or archived."
+        }
+      }
+    },
+    "archive_habit": {
+      "name": "Archive Habit",
+      "description": "Archive a habit and keep its history.",
+      "fields": {
+        "habit_id": {
+          "name": "Habit ID",
+          "description": "Stable internal habit identifier."
+        }
+      }
+    },
+    "log_event": {
+      "name": "Log Event",
+      "description": "Log a habit occurrence.",
+      "fields": {
+        "habit_id": {
+          "name": "Habit ID",
+          "description": "Stable internal habit identifier."
+        },
+        "occurred_at": {
+          "name": "Occurred At",
+          "description": "Optional occurrence timestamp."
+        },
+        "note": {
+          "name": "Note",
+          "description": "Optional note stored with the event."
+        }
+      }
+    }
+  }
+}

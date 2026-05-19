@@ -1,0 +1,8 @@
+{
+  "name": "HAHbT",
+  "content_in_root": false,
+  "country": ["US"],
+  "domain": "hahbt",
+  "homeassistant": "2025.1.0",
+  "render_readme": true
+}

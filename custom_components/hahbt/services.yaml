@@ -1,0 +1,73 @@
+create_habit:
+  name: Create Habit
+  description: Create a new habit stream.
+  fields:
+    name:
+      required: true
+      example: Mow Lawn
+      selector:
+        text:
+    icon:
+      example: mdi:grass
+      selector:
+        icon:
+    notes:
+      selector:
+        text:
+          multiline: true
+
+update_habit:
+  name: Update Habit
+  description: Update a habit's metadata or lifecycle state.
+  fields:
+    habit_id:
+      required: true
+      example: habit_abc123
+      selector:
+        text:
+    name:
+      example: Mow Front Lawn
+      selector:
+        text:
+    icon:
+      example: mdi:grass
+      selector:
+        icon:
+    notes:
+      selector:
+        text:
+          multiline: true
+    status:
+      selector:
+        select:
+          options:
+            - active
+            - inactive
+            - archived
+
+archive_habit:
+  name: Archive Habit
+  description: Archive a habit without deleting its event history.
+  fields:
+    habit_id:
+      required: true
+      example: habit_abc123
+      selector:
+        text:
+
+log_event:
+  name: Log Event
+  description: Log a habit occurrence now or at a specific timestamp.
+  fields:
+    habit_id:
+      required: true
+      example: habit_abc123
+      selector:
+        text:
+    occurred_at:
+      selector:
+        datetime:
+    note:
+      selector:
+        text:
+          multiline: true
