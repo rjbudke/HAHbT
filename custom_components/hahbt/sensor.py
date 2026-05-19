@@ -15,6 +15,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util import dt as dt_util
 
+from .const import STATUS_ARCHIVED
 from .coordinator import HahbtCoordinator
 from .entity import HahbtHabitEntity
 from .models import Habit, HabitEvent
@@ -91,6 +92,12 @@ SENSOR_TYPES: tuple[HabitSensorDescription, ...] = (
 )
 
 
+def should_expose_metric_entities(status: str) -> bool:
+    """Return whether a habit status should expose metric entities."""
+
+    return status != STATUS_ARCHIVED
+
+
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: ConfigEntry,
@@ -104,7 +111,7 @@ async def async_setup_entry(
     def add_missing_entities() -> None:
         new_entities: list[HabitMetricSensor] = []
         for habit in coordinator.data["habits"]:
-            if habit.archived:
+            if not should_expose_metric_entities(habit.status):
                 continue
             for description in SENSOR_TYPES:
                 entity_key = (habit.habit_id, description.key)
