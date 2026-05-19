@@ -8,7 +8,12 @@ from datetime import UTC, datetime
 from statistics import mean
 from typing import Any
 
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorStateClass
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorEntityDescription,
+    SensorStateClass,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import UnitOfTime
 from homeassistant.core import HomeAssistant
@@ -21,16 +26,10 @@ from .entity import HahbtHabitEntity
 from .models import Habit, HabitEvent
 
 
-@dataclass(frozen=True, slots=True)
-class HabitSensorDescription:
+@dataclass(frozen=True, kw_only=True)
+class HabitSensorDescription(SensorEntityDescription):
     """Describe a habit sensor."""
 
-    key: str
-    name: str
-    icon: str | None
-    device_class: SensorDeviceClass | None
-    state_class: SensorStateClass | None
-    native_unit_of_measurement: str | None
     value_fn: Callable[[datetime, list[HabitEvent]], Any]
 
 
@@ -128,6 +127,8 @@ async def async_setup_entry(
 
 class HabitMetricSensor(HahbtHabitEntity, SensorEntity):
     """Expose a computed metric for a habit."""
+
+    entity_description: HabitSensorDescription
 
     def __init__(
         self,

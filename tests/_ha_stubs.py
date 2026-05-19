@@ -77,6 +77,18 @@ class SensorEntity:
     pass
 
 
+@dataclass(frozen=True, kw_only=True)
+class SensorEntityDescription:
+    key: str = ""
+    name: str | None = None
+    icon: str | None = None
+    device_class: str | None = None
+    state_class: str | None = None
+    native_unit_of_measurement: str | None = None
+    suggested_unit_of_measurement: str | None = None
+    entity_registry_enabled_default: bool = True
+
+
 class SensorDeviceClass:
     TIMESTAMP = "timestamp"
     DURATION = "duration"
@@ -171,7 +183,9 @@ def install() -> None:
     config_validation.datetime = _cv_datetime
     entity_platform.AddEntitiesCallback = AddEntitiesCallback
     button.ButtonEntity = ButtonEntity
+    sensor.ButtonEntity = ButtonEntity
     sensor.SensorEntity = SensorEntity
+    sensor.SensorEntityDescription = SensorEntityDescription
     sensor.SensorDeviceClass = SensorDeviceClass
     sensor.SensorStateClass = SensorStateClass
     const.UnitOfTime = UnitOfTime
