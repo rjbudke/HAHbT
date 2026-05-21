@@ -4,6 +4,15 @@ All notable changes to HAHbT will be documented in this file.
 
 The format is loosely based on Keep a Changelog and uses semantic versioning in a practical, lightweight way for the project’s current stage.
 
+## [0.2.2] - 2026-05-21
+
+### Fixed
+- Packaged the integration icon and logo under `custom_components/hahbt/brand/` so the pushed GitHub version matches the branded integration layout expected by newer Home Assistant versions.
+- Bumped the published integration version so Home Assistant and GitHub both reflect the branding fix as a distinct patch release.
+
+### Notes
+- This is a patch release to make the GitHub-published integration state line up cleanly with the in-product version string.
+
 ## [0.2.1] - 2026-05-21
 
 ### Added
