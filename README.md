@@ -39,7 +39,7 @@ The goal is to bridge physical life and Home Assistant automation by making pers
 
 ## Project State
 
-Current public beta version: `0.2.0`
+Current public beta version: `0.2.1`
 
 HAHbT is currently in a strong beta state.
 
@@ -180,6 +180,14 @@ custom_components/hahbt/
   storage.py
   translations/en.json
 ```
+
+## Assets
+
+Official repository assets:
+
+- `images/icon.png`: official square icon
+- `images/logo.png`: transparent logo variant
+- `images/icon-transparent.png`: transparent icon variant
 
 ## Validation Focus
 
