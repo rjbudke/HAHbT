@@ -39,6 +39,8 @@ The goal is to bridge physical life and Home Assistant automation by making pers
 
 ## Project State
 
+Current public beta version: `0.2.0`
+
 HAHbT is currently in a strong beta state.
 
 That means:
