@@ -156,6 +156,11 @@ Manual:
 - copy `custom_components/hahbt/` into your Home Assistant config under `custom_components/hahbt/`
 - restart Home Assistant
 
+Branding note:
+
+- Home Assistant `2026.3` and newer can load packaged integration branding from `custom_components/hahbt/brand/`
+- older Home Assistant versions may still show the generic placeholder icon for custom integrations
+
 After restart:
 
 - go to `Settings -> Devices & Services`

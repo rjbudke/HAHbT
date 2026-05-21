@@ -10,6 +10,7 @@ The format is loosely based on Keep a Changelog and uses semantic versioning in 
 - Added `CHANGELOG.md` to establish versioned release notes in the repository.
 - Added `images/icon-transparent.png` as a transparent-background icon asset.
 - Added a transparent `logo.png` variant aligned with the selected official icon.
+- Added packaged brand assets under `custom_components/hahbt/brand/` so Home Assistant can load the integration icon and logo directly on supported versions.
 
 ### Changed
 - Polished the public-facing packaging around the first beta release.
@@ -19,6 +20,7 @@ The format is loosely based on Keep a Changelog and uses semantic versioning in 
 ### Notes
 - This is a packaging and documentation patch release on top of the first public beta foundation.
 - No integration behavior changes are introduced in `0.2.1` beyond versioned project metadata and asset publication.
+- Local packaged brand assets require Home Assistant `2026.3` or newer; older versions may continue to show the default placeholder image for custom integrations.
 
 ## [0.2.0] - 2026-05-21
 
